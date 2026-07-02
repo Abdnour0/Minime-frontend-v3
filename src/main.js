@@ -267,6 +267,10 @@ class AppInitializer {
         const managers = [
             { name: 'Auth', fn: () => AuthManager.init() },
             { name: 'Settings', fn: () => SettingsManager.init() },
+            { name: 'Translations', fn: async () => {
+                const { loadLiveTranslations } = await import('./components/translations.js');
+                await loadLiveTranslations(state.currentLanguage);
+            }},
             { name: 'Wishlist', fn: () => WishlistManager.init() },
             { name: 'Cart', fn: () => CartManager.init() },
             { name: 'Orders', fn: () => OrderManager.init() },
@@ -428,6 +432,12 @@ class AppInitializer {
 
         // Search filters (category chips, price range)
         ui.setupSearchFilters();
+
+        // Reload live translations on language change
+        window.addEventListener('languageChanged', async (e) => {
+            const { loadLiveTranslations } = await import('./components/translations.js');
+            await loadLiveTranslations(e.detail.language);
+        });
     }
 
     setupSettingsDropdown() {

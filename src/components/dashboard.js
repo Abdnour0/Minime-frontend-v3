@@ -14,6 +14,7 @@ import { AdminActivityLogManager } from './admin-activity-log.js';
 import { AdminEmailTemplatesManager } from './admin-email-templates.js';
 import { AdminWishlistManager } from './admin-wishlist.js';
 import { AdminBackupManager } from './admin-backups.js';
+import { AdminTranslationsManager } from './admin-translations.js';
 
 window.AdminOrdersManager = AdminOrdersManager;
 window.AdminProductsManager = AdminProductsManager;
@@ -25,6 +26,7 @@ window.AdminActivityLogManager = AdminActivityLogManager;
 window.AdminEmailTemplatesManager = AdminEmailTemplatesManager;
 window.AdminWishlistManager = AdminWishlistManager;
 window.AdminBackupManager = AdminBackupManager;
+window.AdminTranslationsManager = AdminTranslationsManager;
 
 function getAuthHeaders() {
     const token = state.token || localStorage.getItem('accessToken');

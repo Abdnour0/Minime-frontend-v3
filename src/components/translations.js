@@ -1553,3 +1553,19 @@ const translations = {
 };
 
 export default translations;
+
+// Lazy live translation loader — called once at app init
+export async function loadLiveTranslations(lang) {
+    try {
+        const { API_URL } = await import('../config.js');
+        const resp = await fetch(`${API_URL}/translations/?lang=${lang}`);
+        if (resp.ok) {
+            const live = await resp.json();
+            if (translations[lang]) {
+                Object.assign(translations[lang], live);
+            }
+        }
+    } catch {
+        // silently fall back to static translations
+    }
+}
